@@ -1,6 +1,12 @@
 # generator-mean [![Build Status](https://secure.travis-ci.org/jrcryer/generator-mean.png?branch=master)](https://travis-ci.org/jrcryer/generator-mean)
 
-A generator for [Yeoman](http://yeoman.io).
+A generator for [Yeoman](http://yeoman.io) that scaffolds a MEAN stack (Mongo, Express, Angular and Node).  Inspired by http://mean.io.
+
+#### Todo
+
+* Add prompt of Bootstrap SASS
+* Add prompt for adding Passport / User auth scaffolding
+* Add prompt for application name
 
 
 ## Getting Started

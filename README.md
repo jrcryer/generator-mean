@@ -7,6 +7,7 @@ A generator for [Yeoman](http://yeoman.io) that scaffolds a MEAN stack (Mongo, E
 * Add prompt of Bootstrap SASS
 * Add prompt for adding Passport / User auth scaffolding
 * Add prompt for application name
+* Check for mongod before install
 
 
 ## Getting Started

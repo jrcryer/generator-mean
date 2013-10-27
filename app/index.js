@@ -22,6 +22,7 @@ MeanGenerator.prototype.grunt = function grunt() {
 
 MeanGenerator.prototype.bower = function bower() {
   this.copy('_bower.json', 'bower.json');
+  this.copy('bowerrc', '.bowerrc');
 };
 
 MeanGenerator.prototype.jshint = function jshint() {

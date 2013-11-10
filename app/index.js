@@ -39,7 +39,7 @@ MeanGenerator.prototype.askFor = function askFor() {
   this.prompt(prompts, function (answers) {
     var features = answers.features;
 
-    function hasFeature(feat) { return features.indexOf(feat) !== -1; }
+    function hasFeature(feat) { return features !== undefined && features.indexOf(feat) !== -1; }
 
     // manually deal with the response, get back and store the results.
     // we change a bit this way of doing to automatically do this in the self.prompt() method.

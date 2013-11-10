@@ -1,7 +1,7 @@
 {
-    "name": "mean",
+    "name": "<%= _.slugify(appName) %>",
     "description": "MEAN - A Modern Stack: MongoDB, ExpressJS, AngularJS, NodeJS. (BONUS: Passport User Support).",
-    "version": "1.0.0",
+    "version": "0.0.1",
     "private": false,
     "author": "Amos Haviv",
     "repository": {
@@ -32,10 +32,14 @@
     "devDependencies": {
         "supertest": "latest",
         "should": "latest",
+        <% if (compassBootstrap) { %>
+        "grunt-contrib-compass": "~0.5.0",<% } %>
         "grunt-contrib-watch": "latest",
         "grunt-contrib-jshint": "latest",
         "grunt-nodemon": "latest",
         "grunt-concurrent": "latest",
-        "grunt-mocha-test": "latest"
+        "grunt-mocha-test": "latest",
+        "load-grunt-tasks": "~0.1.0",
+        "time-grunt": "~0.1.1"
     }
 }

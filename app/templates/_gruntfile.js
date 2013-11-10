@@ -1,6 +1,19 @@
 module.exports = function(grunt) {
+
+    // show elapsed time at the end
+    require('time-grunt')(grunt);
+    // load all grunt tasks
+    require('load-grunt-tasks')(grunt);
+
     // Project Configuration
+    var yeomanConfig = {
+        app: 'app',
+        pub: 'public',
+        dist: 'dist'
+    };
+
     grunt.initConfig({
+        yeoman: yeomanConfig,
         pkg: grunt.file.readJSON('package.json'),
         watch: {
             jade: {
@@ -30,7 +43,7 @@ module.exports = function(grunt) {
             }
         },
         jshint: {
-            all: ['gruntfile.js', 'public/js/**/*.js', 'test/**/*.js', 'app/**/*.js']
+            all: ['gruntfile.js', 'public/js/**/*.js', 'test/**/*.js', 'app/controllers/**/*.js', 'app/views/**/*.js']
         },
         nodemon: {
             dev: {
@@ -49,6 +62,24 @@ module.exports = function(grunt) {
                 }
             }
         },
+        <% if (compassBootstrap) { %>
+        compass: {
+            options: {
+                sassDir: '<%%= yeoman.app %>/styles',
+                cssDir: '<%%= yeoman.pub %>/styles',
+                imagesDir: '<%%= yeoman.app %>/images',
+                javascriptsDir: '<%%= yeoman.app %>/scripts',
+                fontsDir: '<%%= yeoman.app %>/styles/fonts',
+                importPath: '<%%= yeoman.app %>/components',
+                relativeAssets: true
+            },
+            dist: {},
+            server: {
+                options: {
+                    debugInfo: true
+                }
+            }
+        },<% } %>
         concurrent: {
             tasks: ['nodemon', 'watch'],
             options: {
@@ -74,7 +105,7 @@ module.exports = function(grunt) {
     grunt.option('force', true);
 
     //Default task(s).
-    grunt.registerTask('default', ['jshint', 'concurrent']);
+    grunt.registerTask('default', ['jshint', <% if (compassBootstrap) { %>'compass',<% } %> 'concurrent']);
 
     //Test task.
     grunt.registerTask('test', ['mochaTest']);

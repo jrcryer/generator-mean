@@ -2,6 +2,6 @@
     "db": "mongodb://localhost/mean-travis",
     "port": 3001,
     "app": {
-        "name": "MEAN - A Modern Stack - Test on travis"
+        "name": "<%= appName %> - MEAN - A Modern Stack - Test on travis"
     }
 }

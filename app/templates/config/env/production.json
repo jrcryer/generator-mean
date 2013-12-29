@@ -1,6 +1,6 @@
 {
     "db": "mongodb://localhost/mean",
     "app": {
-        "name": "<%= appName %> - MEAN - A Modern Stack - Production"
+        "name": "<%= appName %> - <%= appDescription %>"
     }
 }

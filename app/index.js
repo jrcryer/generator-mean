@@ -26,6 +26,9 @@ MeanGenerator.prototype.askFor = function askFor() {
     name: 'appName',
     message: 'Your application name please?'
   },{
+    name: 'appDescription',
+    message: 'Your application description please?'
+  },{
     type: 'checkbox',
     name: 'features',
     message: 'What more would you like?',
@@ -45,6 +48,7 @@ MeanGenerator.prototype.askFor = function askFor() {
     // we change a bit this way of doing to automatically do this in the self.prompt() method.
     this.compassBootstrap = hasFeature('compassBootstrap');
     this.appName = answers.appName;
+    this.appDescription = answers.appDescription;
     cb();
   }.bind(this));
 };

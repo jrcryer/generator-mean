@@ -36,7 +36,8 @@ module.exports = function(grunt) {
                 },
             },
             css: {
-                files: ['public/css/**'],
+                files: ['app/styles/**', 'public/styles/**'],
+                tasks: ['compass'],
                 options: {
                     livereload: true
                 }

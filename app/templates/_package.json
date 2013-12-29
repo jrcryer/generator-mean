@@ -1,6 +1,6 @@
 {
     "name": "<%= _.slugify(appName) %>",
-    "description": "MEAN - A Modern Stack: MongoDB, ExpressJS, AngularJS, NodeJS. (BONUS: Passport User Support).",
+    "description": "<%= appDescription %>",
     "version": "0.0.1",
     "private": false,
     "author": "<%= authorName %>",

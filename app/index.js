@@ -32,6 +32,9 @@ MeanGenerator.prototype.askFor = function askFor() {
     name: 'authorGithub',
     message: 'Your Github username please?'
   },{
+    name: 'appDescription',
+    message: 'Your application description please?'
+  },{
     type: 'checkbox',
     name: 'features',
     message: 'What more would you like?',
@@ -53,6 +56,7 @@ MeanGenerator.prototype.askFor = function askFor() {
     this.appName = answers.appName;
     this.authorName = answers.authorName;
     this.authorGithub = answers.authorGithub;
+    this.appDescription = answers.appDescription;
     cb();
   }.bind(this));
 };

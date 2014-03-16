@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = function(grunt) {
 
     // show elapsed time at the end
@@ -44,7 +46,12 @@ module.exports = function(grunt) {
             }
         },
         jshint: {
-            all: ['gruntfile.js', 'public/js/**/*.js', 'test/**/*.js', 'app/controllers/**/*.js', 'app/views/**/*.js']
+            all: {
+                src: ['gruntfile.js', 'public/js/**/*.js', 'test/**/*.js', 'app/controllers/**/*.js', 'app/views/**/*.js'],
+                options: {
+                    jshintrc: true
+                }
+            }
         },
         nodemon: {
             dev: {

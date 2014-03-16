@@ -5,12 +5,13 @@
         "jquery": "~1.9.1",
         <% if (compassBootstrap) { %>
         "sass-bootstrap": "~3.0.0",<% } %>
-        "angular": "~1.0.6",
-        "angular-resource": "~1.0.6",
-        "angular-cookies": "~1.0.6",
-        "angular-bootstrap": "~0.4.0",
-        "angular-ui-utils": "0.0.4",
-        "json3": "~3.2.4"
+        "angular": "latest",
+        "angular-resource": "latest",
+        "angular-cookies": "latest",
+        "angular-mocks": "latest",
+        "angular-route": "latest",
+        "angular-bootstrap": "0.10.0",
+        "angular-ui-router": "#master"
     },
     "exportsOverride": {
         "bootstrap": {

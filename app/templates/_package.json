@@ -18,6 +18,7 @@
     },
     "dependencies": {
         "express": "latest",
+        "consolidate": "latest",
         "jade": "latest",
         "mongoose": "latest",
         "connect-mongo": "latest",

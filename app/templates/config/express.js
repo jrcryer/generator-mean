@@ -2,13 +2,20 @@
  * Module dependencies.
  */
 var express = require('express'),
+    consolidate = require('consolidate'),
     mongoStore = require('connect-mongo')(express),
     flash = require('connect-flash'),
     helpers = require('view-helpers'),
     config = require('./config');
 
-module.exports = function(app) {
+module.exports = function(app, db) {
     app.set('showStackError', true);
+
+    // Prettify HTML
+    app.locals.pretty = true;
+
+    // cache=memory or swig dies in NODE_ENV=production
+		app.locals.cache = 'memory';
 
     //Should be placed before express.static
     app.use(express.compress({
@@ -18,65 +25,73 @@ module.exports = function(app) {
         level: 9
     }));
 
-    //Setting the fav icon and static folder
-    app.use(express.favicon());
-    app.use(express.static(config.root + '/public'));
-    app.use('/lib', express.static(config.root + '/app/components'));
-
     //Don't use logger for test env
-    if (process.env.NODE_ENV !== 'test') {
+    if (process.env.NODE_ENV === 'development') {
         app.use(express.logger('dev'));
     }
 
-    //Set views path, template engine and default layout
-    app.set('views', config.root + '/app/views');
-    app.set('view engine', 'jade');
+    // assign the template engine to .html files
+    app.engine('html', consolidate[config.templateEngine]);
 
-    //Enable jsonp
-    app.enable("jsonp callback");
+    // set .html as the default extension
+    app.set('view engine', config.templateEngine);
+
+    // Set views path, template engine and default layout
+    app.set('views', config.root + '/app/views');
+
+    // Enable jsonp
+    app.enable('jsonp callback');
 
     app.configure(function() {
-        //cookieParser should be above session
+        // The cookieParser should be above session
         app.use(express.cookieParser());
 
-        //bodyParser should be above methodOverride
-        app.use(express.bodyParser());
+        // Request body parsing middleware should be above methodOverride
+        app.use(express.urlencoded());
+        app.use(express.json());
         app.use(express.methodOverride());
 
-        //express/mongo session storage
+        // Express/Mongo session storage
         app.use(express.session({
-            secret: 'MEAN',
+            secret: config.sessionSecret,
             store: new mongoStore({
-                url: config.db,
-                collection: 'sessions'
+                db: db.connection.db,
+                collection: config.sessionCollection
             })
         }));
 
-        //connect flash for flash messages
-        app.use(flash());
-
-        //dynamic helpers
+        // Dynamic helpers
         app.use(helpers(config.app.name));
 
-        //routes should be at the last
+        // Connect flash for flash messages
+        app.use(flash());
+
+        // Routes should be at the last
         app.use(app.router);
 
-        //Assume "not found" in the error msgs is a 404. this is somewhat silly, but valid, you can do whatever you like, set properties, use instanceof etc.
+        // Setting the fav icon and static folder
+        app.use(express.favicon());
+        app.use(express.static(config.root + '/public'));
+        app.use('/lib', express.static(config.root + '/app/components'));
+
+        // Assume "not found" in the error msgs is a 404. this is somewhat
+        // silly, but valid, you can do whatever you like, set properties,
+        // use instanceof etc.
         app.use(function(err, req, res, next) {
-            //Treat as 404
+            // Treat as 404
             if (~err.message.indexOf('not found')) return next();
 
-            //Log it
+            // Log it
             console.error(err.stack);
 
-            //Error page
+            // Error page
             res.status(500).render('500', {
                 error: err.stack
             });
         });
 
-        //Assume 404 since no middleware responded
-        app.use(function(req, res, next) {
+        // Assume 404 since no middleware responded
+        app.use(function(req, res) {
             res.status(404).render('404', {
                 url: req.originalUrl,
                 error: 'Not found'

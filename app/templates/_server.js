@@ -38,7 +38,7 @@ walk(models_path);
 var app = express();
 
 //express settings
-require('./config/express')(app);
+require('./config/express')(app, db);
 
 //Bootstrap routes
 require('./config/routes')(app);

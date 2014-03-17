@@ -1,6 +1,6 @@
 {
   "name": "generator-mean",
-  "version": "0.1.0",
+  "version": "0.22.0",
   "description": "A Yeoman generator for MEAN stack, inspired by mean.io",
   "keywords": [
     "yeoman-generator"

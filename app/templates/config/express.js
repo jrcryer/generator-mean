@@ -62,7 +62,7 @@ module.exports = function(app, db) {
     app.use(session({
         secret: config.sessionSecret,
         store: new MongoStore({
-            db: db.connection.db,
+            mongooseConnection: db.connection,
             collection: config.sessionCollection
         })
     }));
